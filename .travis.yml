@@ -12,17 +12,20 @@ install:
 jobs:
   include:
     - os: osx
+      name: "osx gcc"
       compiler: gcc
       osx_image: xcode11.2    # includes gcc-9 by default
       env:
         - GCC_VER="9"
         - MATRIX_EVAL="CC=gcc-${GCC_VER} && CXX=g++-${GCC_VER}"
     - os: osx
+      name: "osx clang"
       compiler: clang
       osx_image: xcode11.2
       env:
         - MATRIX_EVAL=""
     - os: linux
+      name: "linux focal gcc"
       dist: focal
       compiler: gcc
       env:
@@ -42,6 +45,7 @@ jobs:
       after_script:
         - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-${GCC_VER}
     - os: linux
+      name: "linux focal clang"
       dist: focal
       compiler: clang
       env:
